@@ -2,3 +2,8 @@
 *.py[cod]
 __pycache__/
 *.so
+/.pytest_cache/
+.DS_Store
+/build/
+.coverage
+/dist/

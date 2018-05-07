@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='afrigis',
-    version='0.1.dev1',
+    version='0.1.0.dev1',
     description='Afrigis Python Library',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -53,9 +53,7 @@ setup(
 
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),  # Required
 
-    install_requires=[
-        'requests==2.18.4'
-    ],
+    install_requires=[],
     # List additional URLs that are relevant to your project as a dict.
     #
     # This field corresponds to the "Project-URL" metadata fields:
