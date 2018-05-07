@@ -1,9 +1,8 @@
 from unittest import TestCase
-from afrigis import geocode
+from afrigis.services import geocode
 
 
 class TestGeocode(TestCase):
-
     def test_geocode_raises_error_if_afrigis_key_missing(self):
         """
         Type error should be thrown if afrigis key is not passed
@@ -142,7 +141,6 @@ class TestGeocode(TestCase):
                 address_id='stub',
             )
 
-
     def test_geocode_raise_error_if_address_id_missing(self):
         """
         Type error should be thrown if afrigis secret is not passed
@@ -211,4 +209,3 @@ class TestGeocode(TestCase):
                 afrigis_secret='stub',
                 address_id=dict(foo='bar'),
             )
-
