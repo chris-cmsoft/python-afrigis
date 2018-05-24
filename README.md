@@ -27,8 +27,8 @@ $ py.test
 ### Building and pushing to pypi
 
 > In order to di this please make sure you are authenticated against Pypi first :).  
-> You ca do this with the following method: https://docs.python.org/2/distutils/packageindex.html#the-pypirc-file
+> You ca do this with the following method: https://docs.python.org/3/distutils/packageindex.html#the-pypirc-file
 
 ```bash
-$ python setup.py register sdist upload --sign
+$ python setup.py sdist upload
 ```
