@@ -54,6 +54,7 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),  # Required
 
     install_requires=[],
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, <4',
     # List additional URLs that are relevant to your project as a dict.
     #
     # This field corresponds to the "Project-URL" metadata fields:

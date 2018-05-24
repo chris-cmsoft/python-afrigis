@@ -3,12 +3,8 @@ from .url_creator import create_full_url
 from .exceptions import AuthenticationFailedException
 import json
 
-try:
-    # Python 2.7
-    from urllib import quote as url_quote, urlopen, urlencode
-except ImportError:
-    from urllib.parse import quote as url_quote, urlencode
-    from urllib.request import urlopen
+from urllib.parse import urlencode
+from urllib import request as urllib_request
 
 AFRIGIS_REST_URL = 'https://siebel.vodacom.co.za/rest/2/'
 
@@ -40,16 +36,16 @@ def geocode(
     }
 
     base_url = create_full_url(
-        afrigis_key=afrigis_key.encode(),
-        afrigis_secret=afrigis_secret.encode(),
-        afrigis_base_uri=afrigis_rest_uri.encode(),
-        service_name=AFRIGIS_GEOCODE_SERVICE.encode(),
+        afrigis_key=afrigis_key,
+        afrigis_secret=afrigis_secret,
+        afrigis_base_uri=afrigis_rest_uri,
+        service_name=AFRIGIS_GEOCODE_SERVICE,
         query_parameters=query_parameters,
     )
 
     full_url = base_url + '/?' + urlencode(query_parameters)
 
-    info_url = urlopen(full_url)
+    info_url = urllib_request.urlopen(full_url)
 
     result = info_url.read().decode()
 
