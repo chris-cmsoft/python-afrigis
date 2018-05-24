@@ -24,4 +24,18 @@ class TestUrlCreator(TestCase):
 
         self.assertEqual(url, correct_url)
 
+    def test_url_creator_returns_correct_url_without_params(self):
+
+        # Pre-generated url for testing purposes
+        correct_url = 'http://example.rest/api/service.stub/key.stub/CFCWk-x7utrDDUjbDnd0m_Haw1Y'
+
+        url = create_full_url(
+            afrigis_key='key.stub',
+            afrigis_secret='secret.stub',
+            afrigis_base_uri='http://example.rest/api/',
+            service_name='service.stub'
+        )
+
+        self.assertEqual(url, correct_url)
+
 

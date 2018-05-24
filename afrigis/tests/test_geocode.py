@@ -1,4 +1,7 @@
 from unittest import TestCase
+from unittest.mock import patch, Mock
+from .mocks import afrigis_geocode_success_mock, \
+    afrigis_geocode_unauthenticated_mock
 from afrigis.services import geocode
 
 
@@ -209,3 +212,42 @@ class TestGeocode(TestCase):
                 afrigis_secret='stub',
                 address_id=dict(foo='bar'),
             )
+
+    @patch('urllib.request.urlopen')
+    def test_geocode_raises_authentication_exception_if_call_fails_with_401(
+            self,
+            urlopen_mock
+    ):
+        mock = Mock()
+        mock.read.side_effect = lambda: afrigis_geocode_unauthenticated_mock
+        mock.getcode.side_effect = lambda: 200
+        urlopen_mock.return_value = mock
+
+        from afrigis.exceptions import AuthenticationFailedException
+
+        with self.assertRaises(AuthenticationFailedException):
+            geocode(
+                afrigis_key='fake-key',
+                afrigis_secret='fake-secret',
+                address_id='some-fake-id',
+            )
+
+    @patch('urllib.request.urlopen')
+    def test_geocode_returns_correct_json_response_if_afrigis_call_successful(
+            self,
+            urlopen_mock
+    ):
+        mock = Mock()
+        mock.read.side_effect = lambda: afrigis_geocode_success_mock
+        mock.getcode.side_effect = lambda: 200
+        urlopen_mock.return_value = mock
+
+        res = geocode(
+            afrigis_key='fake-key',
+            afrigis_secret='fake-secret',
+            address_id='some-fake-id',
+        )
+
+        self.assertIsInstance(res, dict)
+
+        self.assertIsInstance(res.get('result'), list)
